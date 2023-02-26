@@ -15,23 +15,21 @@ static int disk_io_test() {
     int err = 0;
     disk_t disk_test;
 
-    disk_test.driver = &vdisk_driver;
-
     memset(read_buffer, 0, sizeof(read_buffer));
 
-    err = disk_test.driver->open(&disk_test, (void*)disk_path_test);
+    err = disk_open(&disk_test, "vdisk", &vdisk_driver, (void*)disk_path_test);
     if (err) {
         printf("open disk failed\n");
         return -1;
     }
 
-    err = disk_test.driver->write_sector(&disk_test, (u8_t*)write_buffer, 0, 8);
+    err = disk_write_sector(&disk_test, (u8_t*)write_buffer, 0, 8);
     if (err) {
         printf("disk write failed\n");
         return -1;
     }
 
-    err = disk_test.driver->read_sector(&disk_test, (u8_t*)read_buffer, 0, 8);
+    err = disk_read_sector(&disk_test, (u8_t*)read_buffer, 0, 8);
     if (err) {
         printf("disk read failed\n");
         return -1;
@@ -43,7 +41,7 @@ static int disk_io_test() {
         return -1;
     }
 
-    err = disk_test.driver->close(&disk_test);
+    err = disk_close(&disk_test);
     if (err) {
         printf("disk close failed\n");
         return -1;

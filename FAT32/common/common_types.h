@@ -12,6 +12,7 @@ typedef enum _efat32_err_t {
     FAT32_ERR_OK = 0,
     FAT32_ERR_IO = -1,
     FAT32_ERR_NULLPTR = -2,
+    FAT32_ERR_PARAM = -3,
 } efat32_err_t;
 
 

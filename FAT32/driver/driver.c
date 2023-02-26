@@ -4,12 +4,6 @@
 #include "disk.h"
  
 static efat32_err_t disk_hw_open(struct _disk_t* disk, void* init_data) {
-   
-    if (disk == NULL || init_data == NULL) {
-        printf("paramter is null\n");
-        return FAT32_ERR_NULLPTR;
-    } 
-
     const char* path = (const char*)init_data;
     
     FILE* file = fopen(path, "rb+");
@@ -28,10 +22,6 @@ static efat32_err_t disk_hw_open(struct _disk_t* disk, void* init_data) {
 }
     
 static efat32_err_t disk_hw_close(struct _disk_t* disk) {
-    if (disk == NULL) {
-        return FAT32_ERR_NULLPTR;
-    }
-
     FILE* file = (FILE*)disk->data;
     fclose(file);
 
@@ -39,11 +29,6 @@ static efat32_err_t disk_hw_close(struct _disk_t* disk) {
 }
     
 static efat32_err_t  disk_hw_read_sector(struct _disk_t* disk, u8_t* buffer, u32_t start_sector, u32_t count) {
-    if (disk == NULL) {
-        printf("paramter is null\n");
-        return FAT32_ERR_NULLPTR;
-    }
-
     u32_t offset = start_sector * count;
     FILE* file = (FILE*)disk->data;
 
@@ -62,10 +47,6 @@ static efat32_err_t  disk_hw_read_sector(struct _disk_t* disk, u8_t* buffer, u32
 }
 
 static efat32_err_t  disk_hw_write_sector(struct _disk_t* disk,u8_t* buffer, u32_t start_sector, u32_t count) {
-    if (disk == NULL) {
-        return FAT32_ERR_NULLPTR;
-    }
-
     u32_t offset = start_sector * count;
     FILE* file = (FILE*)disk->data;
 
