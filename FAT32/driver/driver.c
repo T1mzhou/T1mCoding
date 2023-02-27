@@ -13,7 +13,7 @@ static efat32_err_t disk_hw_open(struct _disk_t* disk, void* init_data) {
     }   
 
     disk->data = file;
-    disk->sector_size = 128; // 大于255有问题 ‘int’ to ‘u32_t’ {aka ‘unsigned char’} changes value from ‘256’ to ‘0’
+    disk->sector_size = 512; // 大于255有问题 ‘int’ to ‘u32_t’ {aka ‘unsigned char’} changes value from ‘256’ to ‘0’ 搞成uin8_t导致
     
     fseek(file, 0, SEEK_END);
     disk->total_sector = ftell(file) / disk->sector_size;

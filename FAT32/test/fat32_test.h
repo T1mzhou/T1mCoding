@@ -5,5 +5,6 @@
 #include <string.h>
 
 int test_disk_io();
+int test_disk_part();
 
 #endif // end of __FAT32_TEST_H__
